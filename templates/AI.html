@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Learning Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Login Modal Styles */
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header .logo {
+            font-size: 2.5rem;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: #333;
+            opacity: 0.8;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+        }
+
+        .form-group .error-message {
+            color: #dc3545;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .form-group.error input {
+            border-color: #dc3545;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .login-button {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-button.primary {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .login-button.secondary {
+            background-color: #eee;
+            color: #333;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #eee;
+            border-top: 4px solid #4a90e2;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            color: #28a745;
+            margin-top: 1rem;
+            font-weight: 500;
+        }
+
+        /* Introduction Section Styles */
+        .intro-section {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .intro-section .logo {
+            font-size: 4rem;
+            color: #4a90e2;
+            margin-bottom: 1.5rem;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .intro-section h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .intro-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-item i {
+            font-size: 2rem;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item h3 {
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4a90e2;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .start-button {
+            background: linear-gradient(135deg, #4a90e2, #357ABD);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .start-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+        }
+
+        .start-button i {
+            transition: transform 0.3s ease;
+        }
+
+        .start-button:hover i {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .intro-section h1 {
+                font-size: 2rem;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Admin Toggle Button -->
+        <button class="admin-toggle" onclick="toggleAdminPanel()" title="Quản lý dữ liệu AI">⚙️</button>
+        
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="admin-panel">
+            <h3 style="color: #333; margin-bottom: 1rem; border-bottom: 2px solid #667eea; padding-bottom: 0.5rem;">
+                🧠 Quản lý kiến thức AI
+            </h3>
+            
+            <div class="knowledge-stats">
+                <div style="font-size: 1.1rem; font-weight: bold;">Tổng kiến thức: <span id="totalKnowledge">0</span></div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">Cập nhật lần cuối: <span id="lastUpdate">Chưa có</span></div>
+            </div>
+            
+            <div class="knowledge-form">
+                <div class="form-group">
+                    <label>Môn học:</label>
+                    <select id="knowledgeSubject" class="form-group input" style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px;">
+                        <option value="math">Toán học</option>
+                        <option value="physics">Vật lý</option>
+                        <option value="chemistry">Hóa học</option>
+                        <option value="english">Tiếng Anh</option>
+                        <option value="literature">Văn học</option>
+                        <option value="general">Tổng quát</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Từ khóa/Câu hỏi:</label>
+                    <input type="text" id="knowledgeKeyword" placeholder="VD: phương trình bậc 2, định luật Newton..." 
+                           style="width: 100%; padding: 0.75rem; border: 2px solid #e0e0e0; border-radius: 10px;">
+                </div>
+                
+                <div class="form-group">
+                    <label>Câu trả lời:</label>
+                    <textarea id="knowledgeAnswer" placeholder="Nhập câu trả lời chi tiết..." class="form-textarea"></textarea>
+                </div>
+                
+                <button onclick="addKnowledge()" style="width: 100%; padding: 0.75rem; background: #28a745; color: white; border: none; border-radius: 10px; cursor: pointer; margin-bottom: 1rem;">
+                    ➕ Thêm kiến thức
+                </button>
+            </div>
+            
+            <input type="text" id="searchKnowledge" placeholder="🔍 Tìm kiếm kiến thức..." class="search-knowledge" oninput="filterKnowledge()">
+            
+            <div class="subject-filter">
+                <button class="filter-btn active" onclick="filterBySubject('all')">Tất cả</button>
+                <button class="filter-btn" onclick="filterBySubject('math')">Toán</button>
+                <button class="filter-btn" onclick="filterBySubject('physics')">Lý</button>
+                <button class="filter-btn" onclick="filterBySubject('chemistry')">Hóa</button>
+                <button class="filter-btn" onclick="filterBySubject('english')">Anh</button>
+                <button class="filter-btn" onclick="filterBySubject('literature')">Văn</button>
+            </div>
+            
+            <div id="knowledgeList" style="max-height: 200px; overflow-y: auto;">
+                <!-- Danh sách kiến thức sẽ được thêm vào đây -->
+            </div>
+        </div>
+
+        <header>
+            <div class="logo">🤖 AI Learning Assistant</div>
+            <div class="auth-buttons">
+                <button class="btn btn-login" onclick="showLoginModal()">Đăng nhập</button>
+                <button class="btn btn-register" onclick="showRegisterModal()">Đăng ký</button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="chatbot-section">
+                <h2 class="section-title">💬 Trợ lý AI</h2>
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="welcome-message">
+                            Chào mừng bạn đến với AI Learning Assistant! <br>
+                            Hãy đăng nhập để bắt đầu trò chuyện với trợ lý AI.
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="Nhập câu hỏi của bạn..." disabled>
+                        <button onclick="sendMessage()" disabled id="sendBtn">Gửi</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tests-section">
+                <h2 class="section-title">📚 Bài kiểm tra</h2>
+                <div class="subject-card" onclick="openSubjectTest('math')">
+                    <h3>📐 Toán học</h3>
+                    <p>15 câu hỏi • 30 phút</p>
+                </div>
+                <div class="subject-card" onclick="openSubjectTest('physics')">
+                    <h3>⚛️ Vật lý</h3>
+                    <p>12 câu hỏi • 25 phút</p>
+                </div>
+                <div class="subject-card" onclick="openSubjectTest('chemistry')">
+                    <h3>🧪 Hóa học</h3>
+                    <p>18 câu hỏi • 35 phút</p>
+                </div>
+                <div class="subject-card" onclick="openSubjectTest('english')">
+                    <h3>🇬🇧 Tiếng Anh</h3>
+                    <p>20 câu hỏi • 40 phút</p>
+                </div>
+                <div class="subject-card" onclick="openSubjectTest('literature')">
+                    <h3>📖 Văn học</h3>
+                    <p>10 câu hỏi • 45 phút</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content login-container">
+            <div class="intro-section">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h1>AI Learning Assistant</h1>
+                <div class="intro-content">
+                    <p class="intro-text">
+                        Chào mừng bạn đến với AI Learning Assistant - Trợ lý học tập thông minh được phát triển bởi đội ngũ sinh viên Phenikaa University!
+                    </p>
+                    <div class="features">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <h3>Trí Tuệ Nhân Tạo Tiên Tiến</h3>
+                            <p>Ứng dụng công nghệ AI hiện đại để cung cấp trải nghiệm học tập cá nhân hóa, giúp bạn tiếp thu kiến thức hiệu quả hơn.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Đa Dạng Môn Học</h3>
+                            <p>Hỗ trợ học tập toàn diện với các môn học chính: Toán, Lý, Hóa, Anh, Văn và nhiều chủ đề khác.</p>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-comments"></i>
+                            <h3>Tương Tác Thông Minh</h3>
+                            <p>Trò chuyện trực tiếp với AI để giải đáp thắc mắc, nhận gợi ý học tập và luyện tập kiến thức.</p>
+                        </div>
+                    </div>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Người Dùng</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5000+</span>
+                            <span class="stat-label">Câu Hỏi</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Độ Chính Xác</span>
+                        </div>
+                    </div>
+                    <button class="start-button" onclick="showLoginForm()">
+                        Bắt Đầu Học Tập Ngay
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="login-section" style="display: none;">
+                <div class="login-header">
+                    <div class="logo">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h2>AI Learning Assistant</h2>
+                    <p>Đăng nhập để bắt đầu học tập</p>
+                </div>
+
+                <form class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </label>
+                        <input type="email" id="loginEmail" placeholder="Nhập email của bạn" required>
+                        <div class="error-message">Vui lòng nhập email hợp lệ</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword">
+                            <i class="fas fa-lock"></i>
+                            Mật khẩu
+                        </label>
+                        <div class="password-input">
+                            <input type="password" id="loginPassword" placeholder="Nhập mật khẩu" required>
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                        </div>
+                        <div class="error-message">Vui lòng nhập mật khẩu</div>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Ghi nhớ đăng nhập</span>
+                        </label>
+                        <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                    </div>
+
+                    <div class="login-buttons">
+                        <button type="submit" class="login-button primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Đăng nhập
+                        </button>
+                        <button type="button" class="login-button secondary" onclick="showRegisterModal()">
+                            <i class="fas fa-user-plus"></i>
+                            Đăng ký tài khoản
+                        </button>
+                    </div>
+                </form>
+
+                <div class="social-login">
+                    <p>Hoặc đăng nhập với</p>
+                    <div class="social-buttons">
+                        <button class="social-button google">
+                            <i class="fab fa-google"></i>
+                            Google
+                        </button>
+                        <button class="social-button facebook">
+                            <i class="fab fa-facebook-f"></i>
+                            Facebook
+                        </button>
+                    </div>
+                </div>
+
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Đang xử lý...</p>
+                </div>
+
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <p>Đăng nhập thành công!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2 style="margin-bottom: 1.5rem; color: #333;">Đăng ký</h2>
+            <form onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerName">Họ tên:</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Mật khẩu:</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Xác nhận mật khẩu:</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="form-submit">Đăng ký</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Test Modal -->
+    <div id="testModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="close" onclick="closeModal('testModal')">&times;</span>
+            <h2 id="testTitle" style="margin-bottom: 1.5rem; color: #333;">Bài kiểm tra</h2>
+            
+            <div id="testInfo" style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                    <div>Thời gian: <span id="testTime">30</span> phút</div>
+                    <div>Số câu: <span id="testQuestions">15</span></div>
+                </div>
+                <div id="testTimer" style="text-align: center; font-size: 1.2rem; font-weight: bold; color: #e53e3e;">
+                    Thời gian còn lại: <span id="timeRemaining">30:00</span>
+                </div>
+            </div>
+
+            <div id="testContent" style="max-height: 500px; overflow-y: auto;">
+                <!-- Questions will be loaded here -->
+            </div>
+
+            <div style="margin-top: 1rem; text-align: center;">
+                <button onclick="submitTest()" class="form-submit" style="width: 200px;">Nộp bài</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="auth.js"></script>
+    <script src="calculator.js"></script>
+    <script src="chatbot.js"></script>
+    <script src="admin.js"></script>
+    <script src="test.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // Kiểm tra đăng nhập khi trang được tải
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('user');
+            if (!user) {
+                // Nếu chưa đăng nhập, hiển thị modal đăng nhập
+                document.getElementById('loginModal').style.display = 'block';
+                // Ẩn nội dung chính
+                document.querySelector('.main-content').style.display = 'none';
+            } else {
+                // Nếu đã đăng nhập, hiển thị nội dung chính
+                document.querySelector('.main-content').style.display = 'block';
+                // Cập nhật UI cho người dùng đã đăng nhập
+                const userData = JSON.parse(user);
+                document.querySelector('.auth-buttons').innerHTML = `
+                    <span style="margin-right: 1rem;">Xin chào, ${userData.name}</span>
+                    <button class="btn btn-logout" onclick="handleLogout()">Đăng xuất</button>
+                `;
+                // Kích hoạt chat input
+                document.getElementById('messageInput').disabled = false;
+                document.getElementById('sendBtn').disabled = false;
+            }
+        });
+
+        // Xử lý đăng nhập
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const loginForm = document.getElementById('loginModal').querySelector('form');
+            const loading = document.getElementById('loginModal').querySelector('.loading');
+            const successMessage = document.getElementById('loginModal').querySelector('.success-message');
+            
+            // Reset error states
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('error');
+            });
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            let hasError = false;
+
+            // Validate email
+            if (!email) {
+                document.querySelector('#loginEmail').parentElement.classList.add('error');
+                hasError = true;
+            }
+
+            // Validate password
+            if (!password) {
+                document.querySelector('#loginPassword').parentElement.classList.add('error');
+                hasError = true;
+            }
+
+            if (hasError) return;
+
+            // Show loading
+            loading.style.display = 'block';
+            loginForm.style.display = 'none';
+
+            // Simulate API call
+            setTimeout(() => {
+                // Store user data
+                const userData = {
+                    email: email,
+                    name: email.split('@')[0],
+                    lastLogin: new Date().toISOString()
+                };
+                localStorage.setItem('user', JSON.stringify(userData));
+
+                // Show success message
+                loading.style.display = 'none';
+                successMessage.style.display = 'block';
+
+                // Reload page after 1.5 seconds
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1500);
+            }, 1500);
+        }
+
+        // Xử lý đăng xuất
+        function handleLogout() {
+            localStorage.removeItem('user');
+            window.location.reload();
+        }
+
+        // Thêm hàm toggle password
+        function togglePassword() {
+            const passwordInput = document.getElementById('loginPassword');
+            const toggleIcon = document.querySelector('.toggle-password');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // Add new function to show login form
+        function showLoginForm() {
+            document.querySelector('.intro-section').style.display = 'none';
+            document.querySelector('.login-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
