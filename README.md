@@ -86,6 +86,7 @@ Trong thời đại số, người học ngày càng đối mặt với nhiều 
 ## 📌 Kết luận
 
 Phân chia công việc:
+
 Trần Quốc Huy: Cập nhật dữ liệu vào AI, tạo ra các bài test vào trong trang web, tạo ra các file js phục vụ cho con chatbot AI.
 
 Đỗ Tùng Lâm: Cập nhật dữ liệu tính toán bằng python để giúp cho chatbot có thể tính toán.
