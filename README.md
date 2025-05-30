@@ -87,8 +87,11 @@ Trong thời đại số, người học ngày càng đối mặt với nhiều 
 
 Phân chia công việc:
 Trần Quốc Huy: Cập nhật dữ liệu vào AI, tạo ra các bài test vào trong trang web, tạo ra các file js phục vụ cho con chatbot AI.
+
 Đỗ Tùng Lâm: Cập nhật dữ liệu tính toán bằng python để giúp cho chatbot có thể tính toán.
+
 Đặng Thị Thu Hoài: Tạo ra giao diện đăng nhập.
+
 Nguyễn Văn Dũng: Tạo ra giao diện chatbot và phần giao diện cho các bài test.
 
 Trợ lý học tập AI là một xu hướng tất yếu trong giáo dục hiện đại, không chỉ đơn thuần là công cụ hỗ trợ mà còn là “người bạn đồng hành” trong hành trình học tập.
