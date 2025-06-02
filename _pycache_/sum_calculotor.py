@@ -28,3 +28,7 @@ if __name__ == "__main__":
     # Ví dụ 3: Tính tổng các số chẵn
     numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     print(f"Tổng các số chẵn trong {numbers} là: {sum_even_numbers(numbers)}") 
+
+
+
+    
