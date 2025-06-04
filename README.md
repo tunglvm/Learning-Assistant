@@ -1,14 +1,14 @@
 # Learning Website
 
 # Contributors:
-1. Trần Quốc Huy(trưởng nhóm)
-   githubID: Huybip
-3. Đỗ Tùng Lâm
-   githubID: tunglvm
-5. Đặng Thị Thu Hoài
-   githubID: hoai2310
-7. Nguyễn Văn Dũng
-   githubID: dungpnk
+
+| Contributors         | GithubID       |
+|----------------------|----------------|
+| Đỗ Tùng Lâm          | @tunglvm       |
+| Trần Quốc Huy        | @Huybip        |
+| Đặng Thị Thu Hoài    | @hoai2310      |
+| Nguyễn Tiến Dũng     | @dungpnk       |
+
 
 # Include features
 ## Manage subjects
