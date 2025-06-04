@@ -1,4 +1,4 @@
-# Learning Website
+# Learning Assistant Website
 
 # Contributors:
 
