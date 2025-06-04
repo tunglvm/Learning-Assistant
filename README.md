@@ -1,6 +1,6 @@
 # Learning Website
 
-Contributors:
+# Contributors:
 1. Trần Quốc Huy(trưởng nhóm)
    githubID: Huybip
 3. Đỗ Tùng Lâm
@@ -25,12 +25,11 @@ Contributors:
 
 ## User
 
-| Đối tượng                 | Nhu cầu học tập                          |
-|---------------------------|------------------------------------------|
-| Học sinh – sinh viên      | Làm bài tập, ôn thi, học theo chương trình |
-| Người đi làm/người lớn    | Học ngoại ngữ, kỹ năng mềm, tự học chủ động |
-| Giáo viên/giảng viên      | Soạn bài, tạo đề, theo dõi tiến độ học sinh |
-| Trường học/tổ chức giáo dục | Nâng cao hiệu quả dạy và học               |
+| Đối tượng                   | Nhu cầu học tập                             |
+|-----------------------------|---------------------------------------------|
+| Học sinh – sinh viên        | Làm bài tập, ôn thi, học theo chương trình  |
+| Giáo viên/giảng viên        | Soạn bài, tạo đề, theo dõi tiến độ học sinh |
+| Trường học/tổ chức giáo dục | Nâng cao hiệu quả dạy và học                |
 
 ---
 
