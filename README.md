@@ -7,7 +7,7 @@
 | Đỗ Tùng Lâm          | @tunglvm       |
 | Trần Quốc Huy        | @Huybip        |
 | Đặng Thị Thu Hoài    | @hoai2310      |
-| Nguyễn Tiến Dũng     | @dungpnk       |
+| Nguyễn Văn Dũng      | @dungpnk       |
 
 
 # Include features
