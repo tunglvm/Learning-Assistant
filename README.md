@@ -31,7 +31,7 @@
  Testing
 - Create tests with optimal knowledge content to help students review knowledge.
 
-# Technology
+# Technologies being used
 - Frontend Technologies
    + HTML5
    + CSS3
