@@ -11,15 +11,23 @@
 
 
 # Include features
+ Sign up
+
+ Sign in
+
+ Change Password
+ 
  Manage subjects
 - Suggest appropriate study materials and learning paths.
 - Monitor progress, remind, and support effective review.
 - Provide continuous feedback and motivation for learning.
+
  Chatbot AI
 - Answer learning-related inquiries.
 - Suggest relevant materials and a suitable study plan.
 - Monitor progress, provide reminders, and support effective review.
 - Provide continuous feedback and motivation for learning.
+
  Testing
 - Areate tests with optimal knowledge content to help students review knowledge.
 
