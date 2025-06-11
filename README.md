@@ -29,7 +29,7 @@
 - Provide continuous feedback and motivation for learning.
 
  Testing
-- Areate tests with optimal knowledge content to help students review knowledge.
+- Create tests with optimal knowledge content to help students review knowledge.
 
 # Technology
 - Frontend Technologies
